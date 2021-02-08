@@ -261,7 +261,9 @@ if __name__ == '__main__':
     result = list(kb.query(strQuery))
 
     # Stampa le caserme che possono intervenire
-    print("Sono abilitate ad intervenire le caserme:")
-    for item in result:
-        print(item["X"])
-
+    if(len(result) > 0):
+        print("Sono abilitate ad intervenire le caserme:")
+        for item in result:
+            print(item["X"])
+    else:
+        print("Non ci sono caserme che possono intervenire con efficacia")
