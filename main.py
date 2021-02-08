@@ -18,6 +18,7 @@
 
 import random as random
 from Emergenza import Emergency as Emergenza
+from Classifier import classify
 from Map import Graph
 from Map import Node
 
@@ -257,7 +258,7 @@ if __name__ == '__main__':
     nodo = random_node()
     input = create_situation()
     print(input)
-    print(main(input))
-    pred = main(input)
+    print(classify(input))
+    pred = classify(input)
     print(classification(pred, nodo))
 
