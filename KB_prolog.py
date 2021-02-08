@@ -1,4 +1,7 @@
 from pyswip import Prolog
+
+import Emergenza
+
 prolog = Prolog()
 prolog.assertz("caserma(caserma_1)")
 prolog.assertz("caserma(caserma_2)")
@@ -17,5 +20,12 @@ prolog.assertz("tempo(caserma_1,5)")
 prolog.assertz("tempo(caserma_2,10)")
 prolog.assertz("tempo(caserma_3,2)")
 
-# TODO: impostare i vincoli secondo il grado di emergenza
-print(list(prolog.query("caserma(X), agenti(X, Y), Y > 15, speciali(X,Z), Z > 4, tempo(X,T), T < 6"))[0]["X"])
+
+#
+# print(list(prolog.query("caserma(X), agenti(X, Y), Y > 15, speciali(X,Z), Z > 4, tempo(X,T), T < 6"))[0]["X"])
+
+def findCaserma(emergenza: Emergenza):
+    strQuery = "caserma(X), tempo(X,T), agenti(X,Y), speciali(X,Z), veicoli(X,V), T <=" + str(
+        emergenza.tempo) + " , Y >=" + str(emergenza.num_agenti) + " , Z>=" + str(
+        emergenza.num_speciali) + " , V>=" + str(emergenza.num_veicoli)
+    return list(prolog.query(strQuery))[0]["X"]
