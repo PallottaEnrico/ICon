@@ -1,11 +1,3 @@
-# This is a sample Python script.
-
-# Press Maiusc+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-from dataclasses import dataclass, field
-from queue import PriorityQueue
-
 
 class Node:
     f: int = 0
@@ -47,18 +39,6 @@ class Node:
     def __str__(self):
         return str(self.value)
 
-
-# @dataclass(order=True)
-# class PrioritizedItem:
-#     priority: float
-#     counter: int
-#     item: object = field()
-#
-#     def get_node(self):
-#         return self.item
-#
-#     def __str__(self):
-#         return str(item)
 
 class Graph:
     def __init__(self):
@@ -186,43 +166,117 @@ def printPath(node, path):
         printPath(node.parent, path)
         path.append(node)
 
-
-graph = Graph()
-A = Node("A", 1, 2)
-B = Node("B", 3, 5)
-C = Node("C", 2, 3)
-D = Node("D", 6, 2)
-E = Node("E", 12, 6)
+# def createMap():
+#     mappa = Graph()
+#     #Nodi standard
+#     A = Node("1", 4, 0)
+#     B = Node("2", 4, 2)
+#     C = Node("3", 6, 1)
+#     D = Node("4", 6, 3)
+#     E = Node("5", 9, 4)
+#     F = Node("6", 7, 5)
+#     G = Node("7", 5, 4)
+#     H = Node("8", 9, 7)
+#     I = Node("9", 7, 6)
+#     J = Node("10", 6, 6)
+#     K = Node("11", 5, 6)
+#     L = Node("12", 4, 8)
+#     M = Node("13", 7, 10)
+#     N = Node("14", 3, 8)
+#     O = Node("15", 2, 9)
+#     P = Node("16", 3, 6)
+#     Q = Node("17", 0, 7)
+#     R = Node("18", 2, 5)
+#     S = Node("19", 3, 4)
+#     T = Node("20", 0, 5)
+#     U = Node("21", 0, 3)
+#     W = Node("22", 2, 1)
 #
-# A = Node("A", 1, 1)
-# B = Node("B", 1, 1)
-# C = Node("C", 1, 1)
-# D = Node("D", 1, 1)
-# E = Node("E", 1, 1)
-
-graph.addnode(A)
-graph.addnode(B)
-graph.addnode(C)
-graph.addnode(D)
-graph.addnode(E)
-graph.connect(E, A, 2)
-graph.connect(A, D, 5)
-graph.connect(A, B, 1)
-graph.connect(E, B, 1)
-graph.connect(A, C, 1)
-graph.connect(C, D, 1)
-
-goal = D
-graph.a_star(E, goal)
-path = list()
-printPath(goal, path)
-
-for node in path:
-    if node != goal:
-        print(node, end="->")
-    else:
-        print(node)
-print("Costo= " + str(goal.g))
-
-# for item in final_list:
-#     print(item)
+#     #Caserme
+#     C1 = Node("Caserma 1", 2,3)
+#     C2 = Node("Caserma 2", 7,1)
+#     C3 = Node("Caserma 3", 3,10)
+#
+#     #Aggiungo i nodi alla mappa
+#     mappa.addnode(A)
+#     mappa.addnode(B)
+#     mappa.addnode(C)
+#     mappa.addnode(D)
+#     mappa.addnode(E)
+#     mappa.addnode(F)
+#     mappa.addnode(G)
+#     mappa.addnode(H)
+#     mappa.addnode(I)
+#     mappa.addnode(J)
+#     mappa.addnode(K)
+#     mappa.addnode(L)
+#     mappa.addnode(M)
+#     mappa.addnode(N)
+#     mappa.addnode(O)
+#     mappa.addnode(P)
+#     mappa.addnode(Q)
+#     mappa.addnode(R)
+#     mappa.addnode(S)
+#     mappa.addnode(T)
+#     mappa.addnode(U)
+#     mappa.addnode(W)
+#     mappa.addnode(C1)
+#     mappa.addnode(C2)
+#     mappa.addnode(C3)
+#
+#     #Creo gli archi
+#     mappa.connect(A,B,4)
+#     mappa.connect(A,C2,1)
+#     mappa.connect(A,W,3)
+#     mappa.connect(C2,D,3)
+#     mappa.connect(C2,E,4)
+#     mappa.connect(B,C,3)
+#     mappa.connect(C,D,1)
+#     mappa.connect(D,E,7)
+#     mappa.connect(D,G,4)
+#     mappa.connect(E,F,4)
+#     mappa.connect(E,H,2)
+#     mappa.connect(F,G,6)
+#     mappa.connect(G,K,2)
+#     mappa.connect(H,I,2)
+#     mappa.connect(H,M,1)
+#     mappa.connect(I,J,5)
+#     mappa.connect(J,K,3)
+#     mappa.connect(K,P,3)
+#     mappa.connect(K,L,4)
+#     mappa.connect(L,N,2)
+#     mappa.connect(L,C3,6)
+#     mappa.connect(C3,N,5)
+#     mappa.connect(C3,M,3)
+#     mappa.connect(C3,O,2)
+#     mappa.connect(O,N,2)
+#     mappa.connect(O,P,3)
+#     mappa.connect(O,Q,3)
+#     mappa.connect(O,Q,3)
+#     mappa.connect(N,P,2)
+#     mappa.connect(P,S,2)
+#     mappa.connect(S,R,6)
+#     mappa.connect(S,W,2)
+#     mappa.connect(S,C1,4)
+#     mappa.connect(C1,U,4)
+#     mappa.connect(U,W,3)
+#     mappa.connect(U,T,3)
+#     mappa.connect(T,R,2)
+#     mappa.connect(T,Q,1)
+#     mappa.connect(Q,R,2)
+#     return mappa
+#
+# goal = D
+# mappa.a_star(E, goal)
+# path = list()
+# printPath(goal, path)
+#
+# for node in path:
+#     if node != goal:
+#         print(node, end="->")
+#     else:
+#         print(node)
+# print("Costo= " + str(goal.g))
+#
+# # for item in final_list:
+# #     print(item)
