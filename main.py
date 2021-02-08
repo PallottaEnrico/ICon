@@ -17,10 +17,10 @@
 # Press the green button in the gutter to run the script.
 
 import random as random
-from Classifier import classify
-from Map import Node
-from Map import Graph
 from Emergenza import Emergency as Emergenza
+from Map import Graph
+from Map import Node
+
 
 def createMap():
     mappa = Graph()
