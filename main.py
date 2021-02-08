@@ -18,7 +18,6 @@
 
 import random as random
 from Classifier import main
-import Emergenza
 import Map
 from Map import Node
 from Map import Graph
