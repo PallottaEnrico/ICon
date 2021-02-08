@@ -129,7 +129,7 @@ class Graph:
         while len(open_list) != 0:
             current = minSearch(open_list)
             open_list.remove(current)
-            if current == goal:
+            if current.is_same(goal):
                 break
             successor: Node
             for successor in self.connection(current):
