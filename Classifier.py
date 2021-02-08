@@ -1,69 +1,25 @@
-import numpy as np
 import pandas as pd
-from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.metrics import accuracy_score
-from sklearn.metrics import classification_report
 
 
-# Function importing Dataset
 def importdata():
-    # balance_data = pd.read_csv(
-    #     'https://archive.ics.uci.edu/ml/machine-learning-' +
-    #     'databases/balance-scale/balance-scale.data',
-    #     sep=',', header=None)
-    balance_data = pd.read_csv("DataSet2.csv",sep=',', header=None)
-
-    # Printing the dataset shape
-    print("Dataset Length: ", len(balance_data))
-    print("Dataset Shape: ", balance_data.shape)
-
-    # Printing the dataset obseravtions
-    print("Dataset: ", balance_data)
+    balance_data = pd.read_csv("DataSet2.csv", sep=',', header=None)
     return balance_data
 
 
-# Function to split the dataset
-def splitdataset(balance_data):
-    # Separating the target variable
-    # X = balance_data.values[:, 1:5]
-    # Y = balance_data.values[:, 0]
+def set_training(balance_data, test):
     X = balance_data.values[:, 1:9]
     Y = balance_data.values[:, 9]
-    # print("Print Y: ")
-    # print(Y)
-    # print("Print X: ")
-    # print(X)
-
-    # Splitting the dataset into train and test
     X_train, X_test, y_train, y_test = train_test_split(
-        X, Y, test_size=0.1, random_state=0)
+        X, Y, test_size=0.000001, random_state=0)
 
-    X_test = [[0,1,0,0,1,1,0,1]]
-    y_test = [3]
-
-    print("X test:")
-    print(X_test)
-    print("Y test: ")
-    print(y_test)
+    X_test = test
 
     return X, Y, X_train, X_test, y_train, y_test
 
 
-# Function to perform training with giniIndex.
-def train_using_gini(X_train, X_test, y_train):
-    # Creating the classifier object
-    clf_gini = DecisionTreeClassifier(criterion="gini",
-                                      random_state=100, max_depth=3, min_samples_leaf=5)
-
-    # Performing training
-    clf_gini.fit(X_train, y_train)
-    return clf_gini
-
-
-# Function to perform training with entropy.
-def tarin_using_entropy(X_train, X_test, y_train):
+def tarin_using_entropy(X_train, y_train):
     # Decision tree with entropy
     clf_entropy = DecisionTreeClassifier(
         criterion="entropy", random_state=100,
@@ -74,48 +30,13 @@ def tarin_using_entropy(X_train, X_test, y_train):
     return clf_entropy
 
 
-# Function to make predictions
 def prediction(X_test, clf_object):
-    # Predicton on test with giniIndex
     y_pred = clf_object.predict(X_test)
-    print("Predicted values:")
-    print(y_pred)
     return y_pred
 
-
-# Function to calculate accuracy
-def cal_accuracy(y_test, y_pred):
-    # print("Confusion Matrix: ",
-    #       confusion_matrix(y_test, y_pred))
-
-    print("Accuracy : ",
-          accuracy_score(y_test, y_pred) * 100)
-
-    # print("Report : ",
-    #       classification_report(y_test, y_pred))
-
-
-# Driver code
-def main():
-    # Building Phase
+def main(test):
     data = importdata()
-    X, Y, X_train, X_test, y_train, y_test = splitdataset(data)
-    clf_gini = train_using_gini(X_train, X_test, y_train)
-    clf_entropy = tarin_using_entropy(X_train, X_test, y_train)
-
-    # Operational Phase
-    print("Results Using Gini Index:")
-
-    # Prediction using gini
-    y_pred_gini = prediction(X_test, clf_gini)
-    cal_accuracy(y_test, y_pred_gini)
-
-    print("Results Using Entropy:")
-    # Prediction using entropy
-    y_pred_entropy = prediction(X_test, clf_entropy)
-    cal_accuracy(y_test, y_pred_entropy)
-
-
-# Calling main function
-if __name__ == "__main__":
-    main()
+    X, Y, X_train, X_test, y_train, y_test = set_training(data, test)
+    clf_entropy = tarin_using_entropy(X_train, y_train)
+    y_pred = prediction(X_test, clf_entropy)
+    return y_pred
