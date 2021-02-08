@@ -1,4 +1,4 @@
-import Graph
+import Map
 
 class Emergenza:
 
@@ -13,7 +13,7 @@ class Emergenza:
         self.num_speciali = 0
         self.num_veicoli = 0
 
-    def __init__(self, tempo, num_agenti, num_speciali, num_veicoli, luogo : Graph.Node):
+    def __init__(self, tempo, num_agenti, num_speciali, num_veicoli, luogo : Map.Node):
         self.tempo = tempo
         self.num_agenti = num_agenti
         self.num_speciali = num_speciali
