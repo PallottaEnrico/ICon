@@ -3,6 +3,23 @@ from Classifier import classify
 from Map import Node
 from Map import Graph
 from Emergenza import Emergency
+from pyswip import Prolog
+
+
+def createKB():
+    kb = Prolog()
+    kb.assertz("caserma(caserma_1)")
+    kb.assertz("caserma(caserma_2)")
+    kb.assertz("caserma(caserma_3)")
+
+    kb.assertz("agenti(caserma_1,30)")
+    kb.assertz("agenti(caserma_2,40)")
+    kb.assertz("agenti(caserma_3,50)")
+
+    kb.assertz("speciali(caserma_1,10)")
+    kb.assertz("speciali(caserma_2,7)")
+    kb.assertz("speciali(caserma_3,3)")
+    return kb
 
 
 def createMap():
@@ -212,6 +229,9 @@ def classification(x, node):
 if __name__ == '__main__':
     # Viene generata la mappa della città
     mappa = createMap()
+
+    #Creo la base di conoscenza
+    kb = createKB()
 
     # Genero un evento casuale per cui si richiede un intevento
     place, event = create_event()
