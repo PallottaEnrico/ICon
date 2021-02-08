@@ -3,8 +3,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 
 
-def importdata():
-    balance_data = pd.read_csv("DataSet2.csv", sep=',', header=None)
+def importdata(dataset):
+    balance_data = pd.read_csv(dataset, sep=',', header=None)
     return balance_data
 
 
@@ -19,7 +19,7 @@ def set_training(balance_data, test):
     return X, Y, X_train, X_test, y_train, y_test
 
 
-def tarin_using_entropy(X_train, y_train):
+def train_using_entropy(X_train, y_train):
     # Decision tree with entropy
     clf_entropy = DecisionTreeClassifier(
         criterion="entropy", random_state=100,
@@ -34,9 +34,9 @@ def prediction(X_test, clf_object):
     y_pred = clf_object.predict(X_test)
     return y_pred
 
-def main(test):
-    data = importdata()
+def classify(test, dataset):
+    data = importdata(dataset)
     X, Y, X_train, X_test, y_train, y_test = set_training(data, test)
-    clf_entropy = tarin_using_entropy(X_train, y_train)
+    clf_entropy = train_using_entropy(X_train, y_train)
     y_pred = prediction(X_test, clf_entropy)
     return y_pred

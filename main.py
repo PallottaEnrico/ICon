@@ -17,12 +17,13 @@
 # Press the green button in the gutter to run the script.
 
 import random as random
-from Classifier import main
+from Classifier import classify
 import Emergenza
 import Map
 from Map import Node
 from Map import Graph
-from Emergenza import Emergency as Emergenza
+from Emergenza import Emergency
+
 
 def createMap():
     mappa = Graph()
@@ -124,10 +125,11 @@ def createMap():
     mappa.connect(Q, R, 2)
     return mappa
 
-def create_situation():
+
+def create_event():
     X_Input = [[]]
     list = []
-    print("Creo emergenza casuale:")
+    print("---------------------------EMERGENZA---------------------------")
     list.append(random.randint(0, 4))
     print("NUMERO CRIMINALI:")
     if list.__getitem__(0) == 0:
@@ -140,7 +142,7 @@ def create_situation():
         print("E' stato generato 3: ci sono da 12 a 14 criminali")
     elif list.__getitem__(0) == 4:
         print("E' stato generato 4: ci sono più di 15 criminali")
-    print("")
+    # print("")
 
     list.append(random.randint(0, 2))
     print("ARMI:")
@@ -150,7 +152,7 @@ def create_situation():
         print("E' stato generato 1: ci sono armi bianche")
     elif list.__getitem__(1) == 2:
         print("E' stato generato 2: ci sono armi da fuoco")
-    print("")
+    # print("")
 
     list.append(random.randint(0, 1))
     print("ESPLOSIONE:")
@@ -158,7 +160,7 @@ def create_situation():
         print("E' stato generato 0: non è avvenuta un'esplosione")
     if list.__getitem__(2) == 1:
         print("E' stato generato 1: è avvenuta un'esplosione")
-    print("")
+    # print("")
 
     list.append(random.randint(0, 1))
     print("AGGRESSIONE:")
@@ -166,7 +168,7 @@ def create_situation():
         print("E' stato generato 0: non è avvvenuta un'aggressione")
     if list.__getitem__(3) == 1:
         print("E' stato generato 1: è avvenuta un'aggressione")
-    print("")
+    # print("")
 
     list.append(random.randint(0, 1))
     print("RAPINA:")
@@ -174,7 +176,7 @@ def create_situation():
         print("E' stato generato 0: non è avvvenuta una rapina")
     if list.__getitem__(4) == 1:
         print("E' stato generato 1: è avvenuta una rapina")
-    print("")
+    # print("")
 
     list.append(random.randint(0, 1))
     print("FURTO:")
@@ -182,7 +184,7 @@ def create_situation():
         print("E' stato generato 0: non è avvvenuta un furto")
     if list.__getitem__(5) == 1:
         print("E' stato generato 1: è avvenuta un furto")
-    print("")
+    # print("")
 
     list.append(random.randint(0, 1))
     print("SOMMOSSA:")
@@ -190,7 +192,7 @@ def create_situation():
         print("E' stato generato 0: non è avvvenuta una sommossa")
     if list.__getitem__(6) == 1:
         print("E' stato generato 1: è avvenuta una sommossa")
-    print("")
+    # print("")
 
     list.append(random.randint(0, 1))
     print("FERITI:")
@@ -198,68 +200,45 @@ def create_situation():
         print("E' stato generato 0: non ci sono feriti")
     if list.__getitem__(7) == 1:
         print("E' stato generato 1: ci sono feriti")
-    print("")
-
+    # print("")
     X_Input = [list]
-    return X_Input
 
-def random_node():
-    return random.randint(1, 22)
+    place = random_place(mappa)
+    print("LUOGO:")
+    print("Evento avvenuto nel luogo: " + str(place))
+    print("---------------------------------------------------------------")
+    return place, X_Input
 
+
+def random_place(mappa: Graph):
+    return mappa.nodes()[random.randint(0, 21)]
+
+
+# specifica per ogni grado di emergenza [1,2,3,4,5] le risorse di cui ha bisogno
 def classification(x, node):
-    print("")
-    print("")
     if x == 1:
-        Emergenza(1, 25, 2, 0, 1, node)
-        print("E' STATA PREDETTA UN'EMERGENZA DI GRADO 1:")
-        print("")
-        print("Tempo richiesto per l'intervento: <= 25 min")
-        print("Numero agenti richiesti per l'intervento: >= 2")
-        print("Numero agenti speciali richiesti per l'intervento: >= 0")
-        print("Numero veicoli richiesti per l'intervento: >= 1")
-
+        e = Emergency(1, 25, 2, 0, 1, node)
     elif x == 2:
-        Emergenza(2, 20, 4, 0, 2, node)
-        print("E' STATA PREDETTA UN'EMERGENZA DI GRADO 2:")
-        print("")
-        print("Tempo richiesto per l'intervento: <= 20 min")
-        print("Numero agenti richiesti per l'intervento: >= 4")
-        print("Numero agenti speciali richiesti per l'intervento: >= 0")
-        print("Numero veicoli richiesti per l'intervento: >= 2")
-
+        e = Emergency(2, 20, 4, 0, 2, node)
     elif x == 3:
-        Emergenza(3, 15, 8, 2, 4, node)
-        print("E' STATA PREDETTA UN'EMERGENZA DI GRADO 3:")
-        print("")
-        print("Tempo richiesto per l'intervento: <= 15 min")
-        print("Numero agenti richiesti per l'intervento: >= 8")
-        print("Numero agenti speciali richiesti per l'intervento: >= 2")
-        print("Numero veicoli richiesti per l'intervento: >= 4")
-
+        e = Emergency(3, 15, 8, 2, 4, node)
     elif x == 4:
-        Emergenza(4, 10, 15, 6, 10, node)
-        print("E' STATA PREDETTA UN'EMERGENZA DI GRADO 4:")
-        print("")
-        print("Tempo richiesto per l'intervento: <= 10 min")
-        print("Numero agenti richiesti per l'intervento: >= 15")
-        print("Numero agenti speciali richiesti per l'intervento: >= 6")
-        print("Numero veicoli richiesti per l'intervento: >= 10")
-
+        e = Emergency(4, 10, 15, 6, 10, node)
     elif x == 5:
-        Emergenza(5, 5, 25, 10, 15, node)
-        print("E' STATA PREDETTA UN'EMERGENZA DI GRADO 5:")
-        print("")
-        print("Tempo richiesto per l'intervento: <= 5 min")
-        print("Numero agenti richiesti per l'intervento: >= 25")
-        print("Numero agenti speciali richiesti per l'intervento: >= 10")
-        print("Numero veicoli richiesti per l'intervento: >= 15")
+        e = Emergency(5, 5, 25, 10, 15, node)
+    return e
+
 
 if __name__ == '__main__':
+    # Viene generata la mappa della città
     mappa = createMap()
-    nodo = random_node()
-    input = create_situation()
-    print(input)
-    print(main(input))
-    pred = main(input)
-    print(classification(pred, nodo))
 
+    # Genero un evento casuale per cui si richiede un intevento
+    place, event = create_event()
+
+    # Predizione del grado di emergenza per l'evento generato
+    prediction = classify(event, "DataSet2.csv")
+
+    # Determino per il grado generato le risorse di cui ha bisogno
+    emergency = classification(prediction, place)
+    print(emergency)
