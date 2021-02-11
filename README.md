@@ -5,7 +5,7 @@ Per testare il software è necessario eseguire il file main.py . <br>
 ***Attenzione***: Il software utilizza la libreria *pyswip*, per poter utilizzare tale libreria è necessario aver installato [swi-prolog](https://www.swi-prolog.org/Download.html). <br>
 Per visualizzare la presentazione clicca [qui](Presentazione.pdf)
 ## Descrizione
-Il software simula una situazione in cui si verifica un **evento criminale** ed è necessario l'intervento da parte di una **caserma**.<br>
+Il software simula una situazione in cui si verifica un crimine ed è necessario l'intervento da parte di una **caserma**.<br>
 Il classificatore prenderà in input un evento generato casualmente secondo 8 features e darà in output il grado di emergenza associato all'evento.<br>
 L'algoritmo a* determinerà per ogni caserma il tempo richiesto per arrivare sul luogo dell'evento e inserirà tali valori in una **KB** rappresentata in **Prolog**. <br>
 Una interrogazione alla base di conoscenza determinerà quali sono le caserme in grado di intervenire secondo le necessità di ciascun grado di emergenza descritte di seguito.
