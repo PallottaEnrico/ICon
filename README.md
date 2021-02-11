@@ -2,7 +2,8 @@
 ## Come eseguire
 Il software è sviluppato interamente in python.<br>
 Per testare il software è necessario eseguire il file main.py . <br>
-***Attenzione***: Il software utilizza la libreria *pyswip*, per poter utilizzare tale libreria è necessario aver installato [swi-prolog](https://www.swi-prolog.org/Download.html).
+***Attenzione***: Il software utilizza la libreria *pyswip*, per poter utilizzare tale libreria è necessario aver installato [swi-prolog](https://www.swi-prolog.org/Download.html). <br>
+Per visualizzare la presentazione clicca [qui](Presentazione.pdf)
 ## Descrizione
 Il software simula una situazione in cui si verifica un **evento criminale** ed è necessario l'intervento da parte di una **caserma**.<br>
 Il classificatore prenderà in input un evento generato casualmente secondo 8 features e darà in output il grado di emergenza associato all'evento.<br>
