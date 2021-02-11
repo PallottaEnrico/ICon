@@ -9,8 +9,8 @@ def importdata(dataset):
 
 
 def set_training(balance_data, test):
-    X = balance_data.values[:, 1:9]
-    Y = balance_data.values[:, 9]
+    X = balance_data.values[:, 0:8]
+    Y = balance_data.values[:, 8]
     X_train, X_test, y_train, y_test = train_test_split(
         X, Y, test_size=0.000001, random_state=0)
 
