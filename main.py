@@ -6,6 +6,7 @@ from Emergenza import Emergency
 from pyswip import Prolog
 
 
+# Creo base di conoscenza
 def createKB():
     kb = Prolog()
     kb.assertz("caserma(caserma_1)")
@@ -26,6 +27,7 @@ def createKB():
     return kb
 
 
+# Creo i nodi della mappa
 def createMap():
     mappa = Graph()
     # Nodi standard
@@ -127,6 +129,7 @@ def createMap():
     return mappa
 
 
+# Genero un evento casuale
 def create_event():
     X_Input = [[]]
     list = []
@@ -211,6 +214,7 @@ def create_event():
     return place, X_Input
 
 
+# ritorna un nodo casuale sulla mappa (luogo dell'emergenza)
 def random_place(mappa: Graph):
     return mappa.nodes()[random.randint(0, 21)]
 
@@ -234,7 +238,7 @@ if __name__ == '__main__':
     # Viene generata la mappa della città
     mappa = createMap()
 
-    #Creo la base di conoscenza
+    # Creo la base di conoscenza
     kb = createKB()
 
     # Genero un evento casuale per cui si richiede un intevento
@@ -256,12 +260,13 @@ if __name__ == '__main__':
     kb.assertz("tempo(caserma_3," + str(place.g) + ")")
 
     # Interrogo la base di conoscenza affinché indichi quale/i caserma/e può intervenire soddisfacendo le richieste dell'emergenza
-    strQuery = "caserma(X), tempo(X,T), agenti(X,Y), speciali(X,Z), veicoli(X,V), T<" + str(emergency.tempo+1) + ", Y >=" + str(emergency.num_agenti) + " , Z>=" + str(
+    strQuery = "caserma(X), tempo(X,T), agenti(X,Y), speciali(X,Z), veicoli(X,V), T<" + str(
+        emergency.tempo + 1) + ", Y >=" + str(emergency.num_agenti) + " , Z>=" + str(
         emergency.num_speciali) + " , V>=" + str(emergency.num_veicoli)
     result = list(kb.query(strQuery))
 
     # Stampa le caserme che possono intervenire
-    if(len(result) > 0):
+    if (len(result) > 0):
         print("Sono abilitate ad intervenire le caserme:")
         for item in result:
             print(item["X"])

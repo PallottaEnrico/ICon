@@ -1,6 +1,6 @@
 import Map
 
-
+# quando genero un'emergenza casuale creo un oggetto emergenza per salvare l'intervento richiesto
 class Emergency:
     grado: int
     tempo: int

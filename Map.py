@@ -48,9 +48,10 @@ class Graph:
     def addnode(self, node):
         self.node.append(node)
 
+    # connette due grafi con arco avente peso passato come argomento
     def connect(self, node1, node2, weight):
         if type(weight).__name__ != "int" and type(weight).__name__ != "float":
-            raise Exception("Weight can only be a integer value and not {}".format(type(weight).__name__))
+            raise Exception("Peso non valido".format(type(weight).__name__))
         if node1 in self.node and node2 in self.node:
             if node1 in self.connections:
                 all_nodes = self.connections.get(node1)
@@ -65,19 +66,20 @@ class Graph:
                 self.connections[node2] = {node1: weight}
             # -----------------------------------------------------------
         else:
-            raise Exception("{} - {} is not a valid path".format(node1, node2))
+            raise Exception("L'arco non è valido".format(node1, node2))
 
+    # ritorna peso di arco tra due nodi
     def pathweight(self, node1, node2):
         if node1 in self.connections and node2 in self.connections:
-            # if node1 in self.connections or node2 in self.connections:
             connection1 = self.connections.get(node1)
             if node2 in connection1:
                 return connection1.get(node2)
             else:
-                raise Exception("{} & {} are not connected".format(node1, node2))
+                raise Exception("I due nodi non sono connessi".format(node1, node2))
         else:
-            raise Exception("{} - {} is not a valid path".format(node1, node2))
+            raise Exception("L'arco non e' valido".format(node1, node2))
 
+    #ritorna una lista con i nodi a cui il nodo passato come argomento è connesso
     def connection(self, node):
         result = []
         if node in self.connections:
@@ -86,13 +88,7 @@ class Graph:
             return result
         else:
             return result
-            # raise Exception("{} is not a valid node".format(node))
 
-    def connectionmap(self, node):
-        if node in self.connections:
-            return self.connections.get(node)
-        else:
-            raise Exception("{} is not a valid node".format(node))
 
     def nodes(self):
         return self.node
@@ -147,6 +143,7 @@ class Graph:
                 successor.set_parent(current)
             closed_list.append(current)
 
+# metodo che data una lista restituisce l'oggetto
 def minSearch(list: list()):
     min = Node("", 100, 100)
     min.set_g(9999)
@@ -157,7 +154,7 @@ def minSearch(list: list()):
             min = item
     return min
 
-
+# stampo il percorso trovato per arrivare al nodo destinazione
 def printPath(node, path):
     node: Node()
     if node.parent == None:
