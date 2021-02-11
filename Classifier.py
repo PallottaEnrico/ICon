@@ -9,7 +9,7 @@ def importdata(dataset):
     return balance_data
 
 
-# genero il test set dal dataset importato
+# genero il train set dal dataset importato
 def set_training(balance_data, test):
     X = balance_data.values[:, 0:8]
     Y = balance_data.values[:, 8]
