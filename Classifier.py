@@ -20,7 +20,7 @@ def set_training(balance_data, test):
 
     return X, Y, X_train, X_test, y_train, y_test
 
-# addestro il classificatore usando il metodo dell'entropia
+# addestro il classificatore usando come parametro di split l'entropia
 def train_using_entropy(X_train, y_train):
     clf_entropy = DecisionTreeClassifier(
         criterion="entropy", random_state=100,

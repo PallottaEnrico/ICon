@@ -1,7 +1,9 @@
-
 class Node:
+    # Euristica + Distanza Stimata
     f: int = 0
+    # Valore Euristica
     g: int = 0
+    # Distanza stimata
     h: int = 0
 
     def __init__(self, value, x, y):
@@ -48,7 +50,7 @@ class Graph:
     def addnode(self, node):
         self.node.append(node)
 
-    # connette due grafi con arco avente peso passato come argomento
+    # connette due nodi con arco avente peso passato come argomento
     def connect(self, node1, node2, weight):
         if type(weight).__name__ != "int" and type(weight).__name__ != "float":
             raise Exception("Peso non valido".format(type(weight).__name__))
@@ -79,7 +81,7 @@ class Graph:
         else:
             raise Exception("L'arco non e' valido".format(node1, node2))
 
-    #ritorna una lista con i nodi a cui il nodo passato come argomento è connesso
+    # ritorna una lista di nodi adiacienti a node
     def connection(self, node):
         result = []
         if node in self.connections:
@@ -89,26 +91,16 @@ class Graph:
         else:
             return result
 
-
     def nodes(self):
         return self.node
 
     def __str__(self):
         return self.__class__.__name__
 
+    # Euristica di Manhattan
     @staticmethod
     def euristic(node1, node2):
         return abs(node1.get_x() - node2.get_x()) + abs(node1.get_y() - node2.get_y())
-
-    def min_euristic(self, node):
-        minimum = 666
-        tempnode = Node(0, 0, 0)
-        for noding in self.connections.get(node):
-            newmin = self.euristic(node, noding)
-            if newmin < minimum:
-                tempnode = noding
-                minimum = newmin
-        return tempnode
 
     def a_star(self, start, goal):
 
@@ -120,7 +112,6 @@ class Graph:
         start.set_h(self.euristic(start, goal))
         closed_list = list()
         open_list.append(start)
-
 
         while len(open_list) != 0:
             current = minSearch(open_list)
@@ -143,7 +134,8 @@ class Graph:
                 successor.set_parent(current)
             closed_list.append(current)
 
-# metodo che data una lista restituisce l'oggetto
+
+# metodo che data una lista restituisce il nodo avente il parametro f minimo (euristica + distanza stimata)
 def minSearch(list: list()):
     min = Node("", 100, 100)
     min.set_g(9999)
@@ -153,6 +145,7 @@ def minSearch(list: list()):
         if item.f <= min.f:
             min = item
     return min
+
 
 # stampo il percorso trovato per arrivare al nodo destinazione
 def printPath(node, path):
