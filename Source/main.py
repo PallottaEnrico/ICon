@@ -245,7 +245,10 @@ if __name__ == '__main__':
     place, event = create_event()
 
     # Predizione del grado di emergenza per l'evento generato
-    prediction = classify(event,"DataSet.csv")
+    try:
+        prediction = classify(event,"DataSet.csv")
+    except FileNotFoundError:
+        prediction = classify(event,"Source/DataSet.csv")
 
     # Determino per il grado generato le risorse di cui ha bisogno
     emergency = classification(prediction, place)
