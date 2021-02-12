@@ -253,6 +253,10 @@ if __name__ == '__main__':
     # Determino per il grado generato le risorse di cui ha bisogno
     emergency = classification(prediction, place)
     print(emergency)
+    print("---------------------------------------------------------------")
+
+    print("Calcolo dei percorsi...")
+    print("---------------------------------------------------------------")
 
     # Determino il tempo che ogni caserma impiega ad arrivare sul luogo dell'evento e aggiungo l'informazione alla KB
     mappa.a_star(mappa.nodes()[-3], place)
@@ -262,11 +266,15 @@ if __name__ == '__main__':
     mappa.a_star(mappa.nodes()[-1], place)
     kb.assertz("tempo(caserma_3," + str(place.g) + ")")
 
+    print("Interrogazione alla base di conoscenza...")
+    print("---------------------------------------------------------------")
+
     # Interrogo la base di conoscenza affinché indichi quale/i caserma/e può intervenire soddisfacendo le richieste dell'emergenza
     strQuery = "caserma(X), tempo(X,T), agenti(X,Y), speciali(X,Z), veicoli(X,V), T<" + str(
         emergency.tempo + 1) + ", Y >=" + str(emergency.num_agenti) + " , Z>=" + str(
         emergency.num_speciali) + " , V>=" + str(emergency.num_veicoli)
     result = list(kb.query(strQuery))
+
 
     # Stampa le caserme che possono intervenire
     if (len(result) > 0):
