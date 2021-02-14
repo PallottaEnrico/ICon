@@ -1,6 +1,6 @@
 import random as random
 from Classifier import classify
-from Map import Node, printPath
+from Map import Node
 from Map import Graph
 from Emergenza import Emergency
 from pyswip import Prolog
@@ -27,7 +27,7 @@ def createKB():
     return kb
 
 
-# Creo i nodi della mappa
+# Creo la mappa della città
 def createMap():
     mappa = Graph()
     # Nodi standard

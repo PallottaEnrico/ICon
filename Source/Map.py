@@ -1,9 +1,9 @@
 class Node:
-    # Euristica + Distanza Stimata
+    # Euristica + Distanza Stimata (h+g)
     f: int = 0
-    # Valore Euristica
+    # Distanza effettiva
     g: int = 0
-    # Distanza stimata
+    # Distanza euristica
     h: int = 0
 
     def __init__(self, value, x, y):
