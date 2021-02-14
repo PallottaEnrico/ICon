@@ -43,3 +43,8 @@ Ogni grado di emergenza imporrà delle richieste relative a:
 2. Numero agenti >= 25
 3. Numero agenti speciali >= 10
 4. Numero veicoli >= 15
+
+### Dataset
+Il dataset contiene "66" esempi di classificazione di crimini, in ogni riga troviamo 9 numeri: <br>
+- i primi 8 rappresentano i valori delle feature di input (vedi [presentazione](Presentazione.pdf))
+- l'ultimo, il grado di emergenza associato.
