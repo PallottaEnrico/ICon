@@ -1,6 +1,6 @@
 # Progetto ICon
 **Studenti**:<br>
-Mattia Palano, Enrico Pallotta
+Mattia Palano (700684), Enrico Pallotta (700475)
 ## Come eseguire
 Il software è sviluppato interamente in python.<br>
 Per testare il software è necessario eseguire il file main.py . <br>
