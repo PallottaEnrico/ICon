@@ -1,5 +1,6 @@
 # Progetto ICon
-**Studenti**:<br>
+Project work for the "Knowledge Engineering" course during our Bachelor's Degree in Computer Science.
+**Students**:<br>
 Mattia Palano (700684), Enrico Pallotta (700475)
 ## Come eseguire
 Il software è sviluppato interamente in python.<br>
